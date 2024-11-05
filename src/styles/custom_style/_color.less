@@ -1,0 +1,50 @@
+:root {
+    --primary: #00000058;
+    --secondary: #e9f7ff;
+    --ternary: #e5e4e690;
+}
+
+@primary: var(--primary);
+@secondary: var(--secondary);
+@ternary: var(--ternary);
+
+@black: #000000;
+@white: #ffffff;
+@success: #b7eb8f;
+@info: #91d5ff;
+@warning: #ffe58f;
+@error: #ffccc7;
+@orange: #f19100;
+@indigo: #f7f8fb;
+@success-light: #f6ffed;
+@info-light: #e6f7ff;
+@warning-light: #fffbe6;
+@error-light: #fff1f0;
+@red: #ff1100;
+@green: #52c41a;
+@neavy-blue: #031b4e;
+
+@colors: {
+  primary: @primary;
+  success: @success;
+  info: @info;
+  warning: @warning;
+  error: @error;
+  green: @green;
+  neavy: @neavy-blue;
+  red: @red;
+  black: @black;
+  white: @white;
+};
+
+each(@colors, {
+  .bg-color-@{key} {
+    background: @value !important;
+  }
+
+
+  .text-@{key} {
+    color: @value !important;
+  }
+})
+  
