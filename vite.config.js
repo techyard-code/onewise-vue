@@ -14,7 +14,7 @@ import { fileURLToPath, URL } from 'node:url';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    VueRouter(),
+    VueRouter(), // Enable Vue Router support
     Layouts(),
     Vue({
       template: { transformAssetUrls },
@@ -59,6 +59,16 @@ export default defineConfig({
       '.tsx',
       '.vue',
     ],
+  },
+  build: {
+    base: '/',  // Set the base for production, important for Netlify deployment
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/[name].[hash].js',
+        chunkFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash].[ext]',
+      },
+    },
   },
   server: {
     port: 3000,
