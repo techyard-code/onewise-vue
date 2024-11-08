@@ -93,6 +93,7 @@ export default {
       { title: 'Password', key: 'password', align: 'center' },
       { title: 'Run Type', key: 'spinAuto', align: 'center' },
       { title: 'Duration', key: 'gap', align: 'center' },
+      { title: 'Stop At', key: 'stopAt', align: 'center' },
       { title: 'Created Date', key: 'createdDate', align: 'center' },
       { title: 'Actions', key: 'actions', align: 'end', sortable: false },
     ]);

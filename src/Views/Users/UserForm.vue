@@ -28,7 +28,7 @@
           />
           <v-select
             v-model="userForm.stopAt"
-            label="Select"
+            label="Stop At"
             variant="underlined"
             :items="usersStore.gePlanetrData"
             item-value="id"
