@@ -162,7 +162,7 @@ export default {
       try{
         const response = await axios.delete(`${import.meta.env.VITE_APP_API_BASE_URL}user/${item.id}`, {}, {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
         if (response.data.statusCode == 200) {

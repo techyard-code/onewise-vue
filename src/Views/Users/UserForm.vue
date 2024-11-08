@@ -119,7 +119,7 @@ export default {
         if (actionMethod.value == 'create') {
           response = await axios.post(`${import.meta.env.VITE_APP_API_BASE_URL}user/register`, userForm, {
             headers: {
-              'Authorization': `Bearer ${localStorage.getItem('token')}`,
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
           });
         } else {

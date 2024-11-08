@@ -21,7 +21,8 @@ export const useUsersStore = defineStore('UsersStore', {
             try {
                 const res = await axios.get(`${import.meta.env.VITE_APP_API_BASE_URL}user/getAll/1/${perPage}`, {
                     headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                        Accept: 'application/json',
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
                 });
                 if (res.status === 200) {

@@ -1,10 +1,9 @@
 <template>
   <div>
-    <v-img
-      class="mx-auto my-6" max-width="228"
-      src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-slim-text-light.svg">
-    </v-img>
-    <v-card class="mx-auto pa-12 pb-8" style="background-color: #6c15a2;" elevation="0" max-width="448" rounded="lg">
+    <div class="text-center ma-7">
+      <p class="text-h2 text-white">Planet Quotes</p>
+    </div>
+    <v-card class="mx-auto pa-12 pb-8" elevation="0" max-width="448" rounded="lg">
       <v-form ref="form" @submit.prevent="handleSubmit">
         <v-text-field 
           density="compact" 
@@ -89,15 +88,15 @@ export default {
             localStorage.setItem('token', response.data.entity.token);
             localStorage.setItem('user_type', response.data.entity.user_type); // Assuming you want to store user_type
             snackbarMessage.value = 'Login successful!';
-            snackbarColor.value = 'green'; // Set color to green for success
-            snackbar.value = true; // Show snackbar
+            snackbarColor.value = 'green';
+            snackbar.value = true;
             router.push({ name: 'users' });
           }
         } catch (error) {
           console.error('Login failed:', error);
           snackbarMessage.value = 'Login failed. Please check your credentials.';
           snackbarColor.value = 'red'; // Set color to red for error
-          snackbar.value = true; // Show snackbar
+          snackbar.value = true;
         }
       } else {
         console.log('Form is invalid');
