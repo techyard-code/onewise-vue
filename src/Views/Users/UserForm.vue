@@ -22,7 +22,17 @@
             v-model="userForm.gap"
             label="Duration"
             variant="underlined"
-            :rules="[rules.required, rules.isInteger]"
+            type="number"
+            :rules="[rules.required, rules.isInteger, rules.maxLength]"
+            @input="validateInput"
+          />
+          <v-select
+            v-model="userForm.stopAt"
+            label="Select"
+            variant="underlined"
+            :items="usersStore.gePlanetrData"
+            item-value="id"
+            item-title="name"
           />
           <div class="mt-5">
             <label>Run type</label>
@@ -40,15 +50,17 @@
     </v-card>
 
     <!-- Snackbar for error messages -->
-    <v-snackbar v-model="snackbar"  position="right" :timeout="3000" :color="color">
-      {{ errorMessage }}
-      <v-btn density="compact" style="text-align: right;" text @click="snackbar = false" icon="mdi-close"/>
+    <v-snackbar v-model="snackbar" position="right" :timeout="3000" :color="color">
+      <div class="d-flex justify-space-between">
+        {{ errorMessage }}
+        <v-btn density="compact" style="text-align: right;" text @click="snackbar = false" icon="mdi-close"/>
+      </div>
     </v-snackbar>
   </v-navigation-drawer>
 </template>
 
 <script>
-import { reactive, toRef, watch, ref } from 'vue';
+import { reactive, toRef, watch, ref, onMounted } from 'vue';
 import { useUsersStore } from '@/stores/userstore';
 import axios from 'axios';
 
@@ -80,6 +92,7 @@ export default {
       role: 'user',
       gap: '',
       spinAuto: '',
+      stopAt: ''
     });
 
     const rules = {
@@ -89,6 +102,13 @@ export default {
         const isValidInteger = Number.isInteger(Number(value)) && Number(value) >= 0;
         return isValidInteger || 'Duration must be a positive integer.';
       },
+      maxLength: v => (v.length <= 2) || 'Maximum length is 2',
+    };
+    const validateInput = (event) => {
+      const value = event.target.value;
+      if (value && !/^\d*$/.test(value)) {
+        userForm.gap = value.slice(0, -1);
+      }
     };
     const isValid = ref(true);
     const formRef = ref(null);
@@ -172,7 +192,9 @@ export default {
       snackbar,
       errorMessage,
       showError,
-      color
+      color,
+      validateInput,
+      usersStore
     };
   },
 };

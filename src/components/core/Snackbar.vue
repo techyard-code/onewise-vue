@@ -3,8 +3,9 @@
   <div id="app">
     <v-btn @click="showError">Trigger Error Snackbar</v-btn>
     <v-snackbar v-model="snackbar" :timeout="3000" color="red">
-      {{ errorMessage }}
-      <v-btn color="pink" text @click="snackbar = false">Close</v-btn>
+      <div class="d-flex justify-space-between">
+        {{ errorMessage }}
+        <v-btn color="pink" text @click="snackbar = false">Close</v-btn>
     </v-snackbar>
   </div>
 </template>

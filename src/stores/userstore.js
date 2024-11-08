@@ -4,16 +4,20 @@ import { defineStore } from 'pinia';
 export const useUsersStore = defineStore('UsersStore', { 
     state: () => ({
         userList: [],
-        filterData: {
-            search: '',
-            status: '',
-            order: '',
-            sort_by: '',
-            paginated: 1,
-            page_size: 10,
-            page: 1,
-        },
-        response: null // Initialize response in the state
+        // planets
+        planets: [ 
+            { id: 1, name: 'Mercury' }, 
+            { id: 2, name: 'Venus' },
+            { id: 3, name: 'Earth' },
+            { id: 4, name: 'Mars' },
+            { id: 5, name: 'Jupiter' },
+            { id: 6, name: 'Saturn' },
+            { id: 7, name: 'Uranus' },
+            { id: 8, name: 'Neptune' },
+            { id: 9, name: 'Pluto' },
+            { id: 10, name: 'Sun' },
+            { id: 11, name: 'Moon' },
+        ]
     }),
 
     actions: {
@@ -39,6 +43,10 @@ export const useUsersStore = defineStore('UsersStore', {
     getters: {
         getUserData() {
             return this.userList;
+        },
+
+        gePlanetrData() {
+            return this.planets;
         },
     }
 });

@@ -53,8 +53,10 @@
     
     <!-- Snackbar for error messages -->
     <v-snackbar v-model="snackbar" :timeout="3000" position="right" :color="color">
-      {{ errorMessage }}
-      <v-btn density="compact" style="text-align: right;" text @click="snackbar = false" icon="mdi-close"/>
+      <div class="d-flex justify-space-between">
+        {{ errorMessage }}
+        <v-btn density="compact" style="text-align: right;" text @click="snackbar = false" icon="mdi-close"/>
+      </div>
     </v-snackbar>
   </v-container>
 </template>

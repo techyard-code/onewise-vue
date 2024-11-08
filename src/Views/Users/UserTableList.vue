@@ -11,7 +11,7 @@
       </v-col>
     </v-row>
     <v-col class="mt-n6">
-      <v-data-table-server
+      <v-data-table-virtual
         v-model:items-per-page="filterData.itemsPerPage"
         :headers="tableHeaderData"
         :items="filterData.serverItems"
@@ -47,14 +47,16 @@
             </v-list>
           </v-menu>
         </template>
-      </v-data-table-server>
+      </v-data-table-virtual>
     </v-col>
     <user-form :openDrawer="openDrawer" :actionMethod="actionMethod" :formData="formData" @closeIt="closeIt" />
     
     <!-- Snackbar for error messages -->
     <v-snackbar v-model="snackbar" :timeout="3000" position="right" :color="color">
-      {{ errorMessage }}
-      <v-btn density="compact" style="text-align: right;" text @click="snackbar = false" icon="mdi-close"/>
+      <div class="d-flex justify-space-between">
+        {{ errorMessage }}
+        <v-btn density="compact" style="text-align: right;" text @click="snackbar = false" icon="mdi-close"/>
+      </div>
     </v-snackbar>
   </v-container>
 </template>
@@ -79,7 +81,7 @@ export default {
     const actionMethod = ref('create');
     const color = ref('red')
     const filterData = reactive({
-      itemsPerPage: 10,
+      itemsPerPage: 100,
       search: '',
       serverItems: [],
       loading: true,
@@ -107,7 +109,7 @@ export default {
 
     const loadItems = async ({ page, itemsPerPage, sortBy }) => {
       filterData.loading = true;
-      await usersStore.getUserListApi(itemsPerPage);
+      await usersStore.getUserListApi(100);
       if (sortBy.length) {
         const sortKey = sortBy[0].key;
         const sortOrder = sortBy[0].order;
@@ -148,11 +150,6 @@ export default {
       openDrawer.value = true;
     };
 
-    const applyFilter = () => {
-      openFilterModal.value = false;
-      loadItems({ page: 1, itemsPerPage: filterData.itemsPerPage, sortBy: [] });
-    };
-
     const closeIt = () => {
       openDrawer.value = false;
       formData.value = {};
@@ -180,8 +177,7 @@ export default {
     }
 
     onMounted(async () => {
-      if (!localStorage.getItem('token')) router.push({ name: 'login' });
-      await loadItems({ page: 1, itemsPerPage: filterData.itemsPerPage, sortBy: [] });
+      // if (!localStorage.getItem('token')) router.push({ name: 'login' });
     });
 
     return {
@@ -191,7 +187,6 @@ export default {
       openDrawer,
       openFilterModal,
       editItem,
-      applyFilter,
       closeIt,
       actionMethod,
       formData,

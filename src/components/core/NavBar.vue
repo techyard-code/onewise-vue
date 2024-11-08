@@ -1,6 +1,6 @@
 <template>
   <v-app-bar style="background-color: #6c15a2;">
-    <v-app-bar-title class="text-white">Application Bar</v-app-bar-title>
+    <v-app-bar-title class="text-white">Planet Quotes</v-app-bar-title>
     <v-btn class="mr-4" color="#f6bc1c" variant="flat" append-icon="mdi-logout" @click="logout">
       Logout
     </v-btn>
@@ -8,8 +8,10 @@
 
   <!-- Snackbar for success and error messages -->
   <v-snackbar v-model="snackbar" :color="snackbarColor" :timeout="3000" position="right">
-    {{ snackbarMessage }}
-    <v-btn density="compact" style="text-align: right;" text @click="snackbar = false" icon="mdi-close"/>
+    <div class="d-flex justify-space-between">
+      {{ snackbarMessage }}
+      <v-btn density="compact" style="text-align: right;" text @click="snackbar = false" icon="mdi-close"/>
+    </div>
   </v-snackbar>
 </template>
 
